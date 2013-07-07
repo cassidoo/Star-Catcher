@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title>STARCATCHER</title>
+	<script type="text/javascript" src="lib/kinetic-v3.10.3.min.js"></script>
+	<script type="text/javascript" src="model/Game.js"></script>  
+	<script type="text/javascript" src="starcatcher.js"></script>
+	
+	<link rel="stylesheet" href="starstyles.css">
+	
+	<script language="JavaScript" type="text/javascript">
+		var count = 0;
+				
+		function spaceneedle()
+		{
+			banana();
+			countDown();
+		}
+		
+		function countDown()
+		{
+			document.getElementById("timercontainer").innerHTML = "<div id=" +"timer" + "></div>";
+			document.getElementById("startbuttoncontainer").innerHTML = "";
+			document.getElementById("header").innerHTML = "";
+			if(winning === true)
+			{
+				count++;
+				document.getElementById("timer").innerHTML = count;
+				setTimeout("countDown()", 1000);
+			}
+			else
+			{
+				alert("You're done!  Tweet your score or hit F5 to play again!");
+				document.getElementById("timercontainer").innerHTML = "<div id=" +"timer" + ">crap</div>";
+			}
+		}
+		
+		function getCount()
+		{
+			var magic = "https://twitter.com/intent/tweet?button_hashtag=StarCatcher&text=WOWZA!%20I%20just%20scored%20";
+			var wand = "%20in%20StarCatcher!%20Can%20you%20beat%20me%3F";
+			document.getElementById("music").innerHTML = "<audio autoplay="+"autoplay" +"loop="+"loop"+"><source src="+"lalala.mp3"+" type="+"audio/mpeg"+" /></audio>";
+			window.open(magic + count + wand);
+		}
+		
+		!function(d,s,id)
+		{
+			var js,fjs=d.getElementsByTagName(s)[0];
+			if(!d.getElementById(id))
+			{
+				js=d.createElement(s);
+				js.id=id;js.src="http://platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+		}
+		(document,"script","twitter-wjs");
+
+	</script>
+</head>
+
+<body>
+<div id="container" width="100%" height="100%"></div>
+<div id="sky"></div>
+<span id="header">
+	<div id="titleHeader">StarCatcher</div>
+	<div id="desc">Click the stars as they fall to keep them from hitting the unforgiving earth.</div>
+</span>
+<span id="startbuttoncontainer">
+	<input id="startbutton" type="button" class="solid" value="Start" onclick="spaceneedle()">
+</span>
+<div id="clouds">
+	<div class="cloud goober1"></div>
+	<div class="cloud goober2"></div>
+	<div class="cloud goober3"></div>
+	<div class="cloud goober4"></div>
+	<div class="cloud goober5"></div>
+	<div class="cloud goober6"></div>
+</div>
+<div id="ground"></div>
+<div id="ground2"></div>
+<div id="ground3"></div>
+<span id="timercontainer"></span>
+<div id="moon"></div>
+<div id="moon2"></div>
+
+<input id="twitterbutton" type="button" class="solid" value="Tweet Your Score!" onclick="getCount()">
+<span id="music"></span>
+</body>
+
+</html>
